@@ -53,7 +53,7 @@ class TicketController extends Controller
 
         $user = User::find($request->input('user_id'));
 
-        $ticket->assignTo($user);
+        $ticket->assigned = $user;
 
         return redirect()->back()->with('success', 'Ticket attribué avec succès');
     }
@@ -68,6 +68,15 @@ class TicketController extends Controller
 
 
         return view('tickets.show', compact('ticket', 'supports'));
+    }
+
+    public function list()
+    {
+
+        $tickets = Ticket::get();
+
+        // dd($tickets);
+        return view('tickets.index', compact('tickets'));
     }
 
     /**

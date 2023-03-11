@@ -18,6 +18,13 @@
                     <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.index')">
                         {{ __('Mes tickets') }}
                     </x-nav-link>
+
+                    @if (auth()->user()->role == 'admin')
+                    <x-nav-link :href="route('tickets.list')" :active="request()->routeIs('tickets.list')">
+                        {{ __('Les tickets') }}
+                    </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 

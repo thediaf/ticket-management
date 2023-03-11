@@ -17,8 +17,9 @@
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
 
             @foreach ($tickets as $ticket)
+            
 
-                <div class="p-6 flex space-x-2">
+                 <div class="p-6 flex space-x-2">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 
@@ -42,13 +43,19 @@
                         </div>
 
                         
-                        <p class="mt-4 text-lg text-gray-900">{{ $ticket->description }}</p>
-                        <a href="{{ route('tickets.show', $ticket->id) }}">Voir</a>
+                        <div class="my-4 text-lg text-gray-900">
+                            {{ $ticket->description }}
+                            <div>Etat: 
+                                <i>{{ $ticket->state }}</i>
+                            </div>
+                        </div>
+                        <a href="{{ route('tickets.show', $ticket->id) }}" class=" rounded-md text-white p-2 bg-blue-800">Voir</a>
+
                     </div>
 
                 </div>
 
-            @endforeach
+            @endforeach 
 
         </div>
     </div>

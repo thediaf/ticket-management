@@ -20,7 +20,7 @@
                                 <span class="text-gray-800">{{ $ticket->proparty->name }}</span>
 
                                 <small class="ml-2 text-sm text-gray-600">{{ $ticket->created_at->format('j M Y, g:i a') }}</small>
-
+                                <span> {{ $ticket->assignTo->name }}</span>
                             </div>
 
                         </div>
@@ -37,9 +37,10 @@
         @if (auth()->user()->role == 'admin')
             <form method="POST" action="{{ route('tickets.assign', $ticket) }}">
                 @csrf
-                <div class="form-group">
+                <div class="w-full md:w-1/2 px-3 md:my-6 my-2 md:mb-0">
                     <label for="user_id">Attribuer à</label>
-                    <select id="user_id" name="user_id" class="form-control">
+                    <select id="user_id" name="user_id" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+                        <option value="">Choisissez un utilisateur</option>
                         @foreach ($supports as $support)
                             {{-- @if ($user->role == \App\Models\User::ROLE_SUPPORT) --}}
                                 <option value="{{ $support->id }}">{{ $support->name }}</option>
@@ -47,7 +48,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Attribuer</button>
+                <button type="submit" class="ml-9 text-white p-2 bg-blue-800">Attribuer</button>
             </form>
         @endif
 

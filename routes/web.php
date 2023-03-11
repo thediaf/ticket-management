@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +26,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('tickets', TicketController::class)->middleware(['auth']);
-Route::post('/tickets/{ticket}/assign', [TicketController::class, 'assign'])->name('tickets.assign')->middleware(['auth']);
 
-// Route::post('/tickets/{ticket}/assign', [TicketController::class, 'assign'])->middleware('admin');
+Route::get('/liste', '\App\Http\Controllers\TicketController@list')->name('tickets.list');
+Route::post('/tickets/{ticket}/assign', '\App\Http\Controllers\TicketController@assign')->name('tickets.assign');;
 
 Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
 
