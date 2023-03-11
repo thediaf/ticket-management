@@ -20,7 +20,7 @@
                                 <span class="text-gray-800">{{ $ticket->proparty->name }}</span>
 
                                 <small class="ml-2 text-sm text-gray-600">{{ $ticket->created_at->format('j M Y, g:i a') }}</small>
-                                <span> {{ $ticket->assignTo->name }}</span>
+                                <span class="ml-9"> Attribuer a {{ $ticket->assignTo ? $ticket->assignTo->name : '---' }}</span>
                             </div>
 
                         </div>
@@ -35,6 +35,8 @@
         </div>
 
         @if (auth()->user()->role == 'admin')
+        @unless ($ticket->assignTo)
+            
             <form method="POST" action="{{ route('tickets.assign', $ticket) }}">
                 @csrf
                 <div class="w-full md:w-1/2 px-3 md:my-6 my-2 md:mb-0">
@@ -50,6 +52,7 @@
                 </div>
                 <button type="submit" class="ml-9 text-white p-2 bg-blue-800">Attribuer</button>
             </form>
+            @endunless
         @endif
 
     </div>

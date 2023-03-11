@@ -49,11 +49,12 @@ class TicketController extends Controller
 
     public function assign(Ticket $ticket, Request $request)
     {
-        $this->authorize('assign', $ticket);
+        // $this->authorize('assign', $ticket);
 
         $user = User::find($request->input('user_id'));
 
-        $ticket->assigned = $user;
+        $ticket->assigned = $request->input('user_id');
+        $ticket->update();
 
         return redirect()->back()->with('success', 'Ticket attribué avec succès');
     }

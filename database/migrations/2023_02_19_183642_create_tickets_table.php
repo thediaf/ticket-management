@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('owner');
             $table->foreign('owner')->references('id')->on('users');
-            $table->unsignedBigInteger('assigned');
+            $table->unsignedBigInteger('assigned')->nullable();
             $table->foreign('assigned')->references('id')->on('users');
             $table->enum('state', ['REÇU', 'EN COURS', 'EN ATTENTE', 'NE PAS TRAITER', 'TERMINÉ', 'CLÔTURÉ'])->default('REÇU');
             $table->timestamps();
