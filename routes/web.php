@@ -28,7 +28,9 @@ Route::get('/dashboard', function () {
 Route::resource('tickets', TicketController::class)->middleware(['auth']);
 
 Route::get('/liste', '\App\Http\Controllers\TicketController@list')->name('tickets.list');
-Route::post('/tickets/{ticket}/assign', '\App\Http\Controllers\TicketController@assign')->name('tickets.assign');;
+Route::get('/mes-taches', '\App\Http\Controllers\TicketController@tasks')->name('tickets.tasks');
+Route::post('/tickets/{ticket}/assign', '\App\Http\Controllers\TicketController@assign')->name('tickets.assign');
+Route::post('/tickets/{ticket}/etat', '\App\Http\Controllers\TicketController@progress')->name('tickets.state');
 
 Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
 

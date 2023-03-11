@@ -25,7 +25,11 @@
 
                         </div>
 
-                        <p class="mt-4 text-lg text-gray-900">{{ $ticket->description }}</p>
+                        <div class="mt-4 text-lg text-gray-900">{{ $ticket->description }}
+                            <div>Etat: 
+                                <i>{{ $ticket->state }}</i>
+                            </div>
+                        </div>
 
                     </div>
 

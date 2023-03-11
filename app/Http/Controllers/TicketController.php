@@ -54,9 +54,20 @@ class TicketController extends Controller
         $user = User::find($request->input('user_id'));
 
         $ticket->assigned = $request->input('user_id');
+        $ticket->state = "EN COURS";
+
         $ticket->update();
 
         return redirect()->back()->with('success', 'Ticket attribué avec succès');
+    }
+
+    public function progress(Ticket $ticket, Request $request)
+    {
+
+        $ticket->state = $request->input('etat');
+        $ticket->update();
+
+        return redirect()->back()->with('success', 'Etat du ticket change avec succès');
     }
 
 
@@ -69,6 +80,15 @@ class TicketController extends Controller
 
 
         return view('tickets.show', compact('ticket', 'supports'));
+    }
+
+    public function tasks()
+    {
+
+        $tickets = Ticket::where('assigned', auth()->id())->get();
+
+        // dd($tickets);
+        return view('tickets.index', compact('tickets'));
     }
 
     public function list()

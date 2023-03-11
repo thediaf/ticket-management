@@ -44,7 +44,7 @@
 
                         
                         <div class="my-4 text-lg text-gray-900">
-                            {{ $ticket->description }}
+                            {{ $ticket->title }}
                             <div>Etat: 
                                 <i>{{ $ticket->state }}</i>
                             </div>
@@ -54,7 +54,26 @@
                     </div>
 
                 </div>
-
+                @if (auth()->user()->role == 'support')
+                {{-- @unless ($ticket->assignTo) --}}
+                    
+                    <form method="POST" action="{{ route('tickets.state', $ticket) }}" class="m-3">
+                        @csrf
+                        <div class="w-full md:w-1/2 px-3 md:my-6 my-2 md:mb-0">
+                            <label for="etat">Changer l'etat</label>
+                            <select id="etat" name="etat" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+                                <option value="">Etat</option>
+                                <option value="EN ATTENTE">En attente</option>
+                                <option value="NE PAS TRAITER">Ne pas traiter</option>
+                                <option value="TERMINÉ">Termin&eacute;</option>
+                                <option value="CLÔTURÉ">Clotur&eacute;</option>
+                                
+                            </select>
+                        </div>
+                        <button type="submit" class="ml-9 mb-2 text-white p-2 bg-blue-800">Attribuer</button>
+                    </form>
+                    {{-- @endunless --}}
+                @endif
             @endforeach 
 
         </div>

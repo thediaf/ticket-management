@@ -25,6 +25,12 @@
                     </x-nav-link>
                     @endif
 
+                    @if (auth()->user()->role == 'support')
+                    <x-nav-link :href="route('tickets.tasks')" :active="request()->routeIs('tickets.tasks')">
+                        {{ __('Mes taches') }}
+                    </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
